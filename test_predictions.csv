@@ -1,0 +1,140 @@
+movie_id,movie_title,lead_actor,release_date,prior_films,positive_probability_pct,predicted,actual
+561,Ramprasad Ki Tehrvi,Naseeruddin Shah,2020-12-31,4,52.7,positive,negative
+562,Roohi,Rajkummar Rao,2021-03-11,11,38.5,negative,negative
+563,Mumbai Saga,John Abraham,2021-03-18,21,53.7,positive,positive
+564,The Big Bull,Abhishek Bachchan,2021-04-08,27,44.0,negative,negative
+565,Radhe - Your Most Wanted Bhai,Salman Khan,2021-05-13,35,46.0,negative,negative
+566,Sherni,Vidya Balan,2021-06-18,6,41.0,negative,negative
+567,Haseen Dillruba,Taapsee Pannu,2021-07-02,8,38.1,negative,negative
+568,Bhuj - The Pride Of India,Ajay Devgn,2021-08-13,41,57.8,positive,positive
+569,Bellbottom,Akshay Kumar,2021-08-18,10,45.6,negative,positive
+570,Chehre,Amitabh Bachchan,2021-08-26,32,47.7,negative,negative
+571,Thalaivii,Kangana Ranaut,2021-09-08,7,48.6,negative,positive
+572,Bhoot Police,Saif Ali Khan,2021-09-10,21,45.0,negative,negative
+573,Rashmi Rocket,Taapsee Pannu,2021-10-14,9,36.1,negative,negative
+574,Hum Do Hamare Do,Rajkummar Rao,2021-10-29,12,38.5,negative,negative
+575,Sooryavanshi,Akshay Kumar,2021-11-05,11,45.1,negative,positive
+576,Bunty Aur Babli 2,Rani Mukerji,2021-11-19,4,46.7,negative,negative
+577,Satyameva Jayate 2,John Abraham,2021-11-24,22,55.7,positive,positive
+578,Antim - The Final Truth,Salman Khan,2021-11-26,36,47.6,negative,positive
+579,Bob Biswas,Abhishek Bachchan,2021-12-03,28,44.7,negative,negative
+580,83,Ranveer Singh,2021-12-20,3,50.1,positive,positive
+581,Atrangi Re,Akshay Kumar,2021-12-24,12,45.0,negative,negative
+582,Looop Lapeta,Taapsee Pannu,2022-02-04,10,36.1,negative,negative
+583,Badhaai Do,Rajkummar Rao,2022-02-11,13,39.2,negative,negative
+584,Gehraiyaan,Deepika Padukone,2022-02-11,3,48.5,negative,negative
+585,Jhund,Amitabh Bachchan,2022-03-02,33,46.0,negative,positive
+586,Bachchhan Paandey,Akshay Kumar,2022-03-18,13,47.5,negative,positive
+587,Jalsa,Vidya Balan,2022-03-18,7,38.9,negative,negative
+588,Attack - Part I,John Abraham,2022-04-01,23,54.3,positive,negative
+589,Dasvi,Abhishek Bachchan,2022-04-07,29,44.7,negative,negative
+590,Jersey,Shahid Kapoor,2022-04-22,20,45.2,negative,negative
+591,Runway 34,Ajay Devgn,2022-04-29,42,59.2,positive,negative
+592,Thar,Anil Kapoor,2022-05-06,13,38.4,negative,positive
+593,Dhaakad,Kangana Ranaut,2022-05-20,8,40.4,negative,negative
+594,Samrat Prithviraj,Akshay Kumar,2022-06-03,14,45.1,negative,positive
+595,Jugjugg Jeeyo,Varun Dhawan,2022-06-22,3,38.8,negative,positive
+596,Rocketry - The Nambi Effect,R Madhavan,2022-06-30,2,27.7,negative,negative
+597,Hit - The First Case,Rajkummar Rao,2022-07-15,14,37.9,negative,negative
+598,Shabaash Mithu,Taapsee Pannu,2022-07-15,11,34.4,negative,negative
+599,Shamshera,Ranbir Kapoor,2022-07-22,7,43.5,negative,negative
+600,Ek Villain Returns,John Abraham,2022-07-28,24,54.3,positive,positive
+601,Laal Singh Chaddha,Aamir Khan,2022-08-11,4,52.8,positive,negative
+602,Raksha Bandhan,Akshay Kumar,2022-08-11,15,44.9,negative,positive
+603,Do Baaraa,Taapsee Pannu,2022-08-19,12,35.1,negative,negative
+604,Cuttputlli,Akshay Kumar,2022-09-02,16,45.3,negative,negative
+605,Chup,Sunny Deol,2022-09-22,18,33.9,negative,negative
+606,Vikram Vedha,Hrithik Roshan,2022-09-29,19,51.8,positive,positive
+607,Goodbye,Amitabh Bachchan,2022-10-07,34,52.7,positive,negative
+608,Ram Setu,Akshay Kumar,2022-10-25,17,43.8,negative,negative
+609,Thank God,Ajay Devgn,2022-10-25,43,57.4,positive,positive
+610,Monica O My Darling,Rajkummar Rao,2022-11-11,15,38.3,negative,negative
+611,Uunchai,Amitabh Bachchan,2022-11-11,35,48.8,negative,positive
+612,Drishyam 2,Ajay Devgn,2022-11-18,44,54.1,positive,positive
+613,Blurr,Taapsee Pannu,2022-12-09,13,33.7,negative,negative
+614,Kuttey,Arjun Kapoor,2023-01-13,3,27.6,negative,negative
+615,Pathaan,Shah Rukh Khan,2023-01-25,27,52.2,positive,positive
+616,Farzi,Shahid Kapoor,2023-02-10,21,58.0,positive,negative
+617,Selfiee,Akshay Kumar,2023-02-24,18,38.1,negative,negative
+618,Mrs. Chatterjee Vs Norway,Rani Mukerji,2023-03-17,5,37.5,negative,negative
+619,Bholaa,Ajay Devgn,2023-03-30,45,52.2,positive,positive
+620,Kisi Ka Bhai Kisi Ki Jaan,Salman Khan,2023-04-21,37,46.5,negative,positive
+621,Sirf Ek Bandaa Kaafi Hai,Manoj Bajpayee,2023-05-22,13,40.6,negative,positive
+622,Jogira Sara Ra Ra,Nawazuddin Siddiqui,2023-05-26,10,29.7,negative,negative
+623,Bloody Daddy,Shahid Kapoor,2023-06-09,22,58.0,positive,negative
+624,Neeyat,Vidya Balan,2023-07-07,8,38.4,negative,negative
+625,Ghoomer,Abhishek Bachchan,2023-08-18,30,44.6,negative,negative
+626,Haddi,Nawazuddin Siddiqui,2023-09-07,11,28.3,negative,negative
+627,Jawan,Shah Rukh Khan,2023-09-07,28,53.7,positive,positive
+628,Jaane Jaan,Kareena Kapoor Khan,2023-09-21,2,39.0,negative,negative
+629,Mission Raniganj,Akshay Kumar,2023-10-06,19,37.3,negative,positive
+630,Tejas,Kangana Ranaut,2023-10-27,9,38.5,negative,negative
+631,Tiger 3,Salman Khan,2023-11-12,38,49.6,negative,positive
+632,Fighter,Hrithik Roshan,2024-01-25,20,51.1,positive,positive
+633,Teri Baaton Mein Aisa Uljha Jiya,Shahid Kapoor,2024-02-09,23,49.5,negative,negative
+634,Shaitaan,Ajay Devgn,2024-03-08,46,52.1,positive,positive
+635,Yodha,Sidharth Malhotra,2024-03-15,5,38.2,negative,negative
+636,Crew,Kareena Kapoor Khan,2024-03-28,3,38.2,negative,positive
+637,Maidaan,Ajay Devgn,2024-04-09,47,53.2,positive,positive
+638,Bade Miyan Chote Miyan,Akshay Kumar,2024-04-11,20,37.7,negative,negative
+639,Silence 2: The Night Owl Bar Shootout,Manoj Bajpayee,2024-04-16,14,41.7,negative,negative
+640,Do Aur Do Pyaar,Vidya Balan,2024-04-19,9,37.5,negative,negative
+641,Srikanth,Rajkummar Rao,2024-05-07,16,38.9,negative,positive
+642,Bhaiyya Ji,Manoj Bajpayee,2024-05-24,15,41.0,negative,negative
+643,Mr. and Mrs. Mahi,Rajkummar Rao,2024-05-31,17,46.8,negative,positive
+644,Rautu Ka Raaz,Nawazuddin Siddiqui,2024-06-28,12,27.6,negative,negative
+645,Kakuda,Sonakshi Sinha,2024-07-11,5,33.2,negative,negative
+646,Sarfira,Akshay Kumar,2024-07-12,21,42.0,negative,negative
+647,Auron Mein Kahan Dum Tha,Ajay Devgn,2024-08-02,48,53.7,positive,negative
+648,Phir Aayi Hasseen Dillruba,Taapsee Pannu,2024-08-09,14,33.5,negative,negative
+649,Khel Khel Mein,Akshay Kumar,2024-08-15,22,42.6,negative,positive
+650,Stree 2,Rajkummar Rao,2024-08-15,18,54.9,positive,positive
+651,Vedaa,John Abraham,2024-08-15,25,52.1,positive,negative
+652,Visfot,Riteish Deshmukh,2024-09-06,14,34.0,negative,negative
+653,Singham Again,Ajay Devgn,2024-11-01,49,49.9,negative,positive
+654,I Want To Talk,Abhishek Bachchan,2024-11-22,31,42.1,negative,negative
+655,Despatch,Manoj Bajpayee,2024-12-13,16,39.5,negative,negative
+656,Emergency,Kangana Ranaut,2025-01-17,10,37.7,negative,negative
+657,Sky Force,Akshay Kumar,2025-01-23,23,43.3,negative,positive
+658,Deva,Shahid Kapoor,2025-01-31,24,42.6,negative,negative
+659,Be Happy,Abhishek Bachchan,2025-03-14,32,40.5,negative,negative
+660,Sikandar,Salman Khan,2025-03-30,39,49.1,negative,negative
+661,Jaat,Sunny Deol,2025-04-10,19,34.3,negative,positive
+662,Ground Zero,Emraan Hashmi,2025-04-25,24,47.1,negative,negative
+663,Jewel Thief,Saif Ali Khan,2025-04-25,22,45.1,negative,negative
+664,Costao,Nawazuddin Siddiqui,2025-04-30,13,27.7,negative,negative
+665,Raid 2,Ajay Devgn,2025-05-01,50,51.0,positive,positive
+666,The Bhootnii,Sanjay Dutt,2025-05-01,21,41.8,negative,negative
+667,Bhool Chuk Maaf,Rajkummar Rao,2025-05-23,19,60.2,positive,negative
+668,Kaalidhar Laapata,Abhishek Bachchan,2025-07-04,33,41.9,negative,negative
+669,Maalik,Rajkummar Rao,2025-07-11,20,53.6,positive,negative
+670,Nikita Roy,Sonakshi Sinha,2025-07-18,6,32.6,negative,negative
+671,Son Of Sardaar 2,Ajay Devgn,2025-08-01,51,49.6,negative,negative
+672,Tehran,John Abraham,2025-08-14,26,49.0,negative,negative
+673,War 2,Hrithik Roshan,2025-08-14,21,55.7,positive,negative
+674,Inspector Zende,Manoj Bajpayee,2025-09-05,17,38.7,negative,positive
+675,Jugnuma,Manoj Bajpayee,2025-09-12,18,38.9,negative,negative
+676,Jolly LLB 3,Akshay Kumar,2025-09-18,24,48.9,negative,positive
+677,Bhagwat - Chapter One: Raakshas,Arshad Warsi,2025-10-17,7,31.7,negative,negative
+678,Haq,Emraan Hashmi,2025-11-05,25,46.3,negative,positive
+679,De De Pyaar De 2,Ajay Devgn,2025-11-14,52,49.5,negative,positive
+680,Mastiii 4,Riteish Deshmukh,2025-11-21,15,33.5,negative,negative
+681,Raat Akeli Hai: The Bansal Murders,Nawazuddin Siddiqui,2025-12-19,14,27.9,negative,negative
+682,Mardaani 3,Rani Mukerji,2026-01-30,6,37.1,negative,positive
+683,O' Romeo,Shahid Kapoor,2026-02-13,25,40.6,negative,negative
+684,Assi,Taapsee Pannu,2026-02-19,15,33.4,negative,positive
+685,Subedaar,Anil Kapoor,2026-03-05,14,44.6,negative,negative
+686,Toaster,Rajkummar Rao,2026-04-15,21,53.7,positive,negative
+687,Bhooth Bangla,Akshay Kumar,2026-04-16,25,49.3,negative,positive
+688,Raja Shivaji,Riteish Deshmukh,2026-05-01,16,31.6,negative,positive
+689,Main Actor Nahin Hoon,Nawazuddin Siddiqui,2026-05-08,15,27.7,negative,negative
+690,Kartavya,Saif Ali Khan,2026-05-15,23,45.4,negative,negative
+691,System,Sonakshi Sinha,2026-05-22,7,33.2,negative,negative
+692,Bandar,Bobby Deol,2026-06-05,14,20.5,negative,negative
+693,Bharat Bhhagya Viddhaata,Kangana Ranaut,2026-06-12,11,37.6,negative,negative
+694,Governor,Manoj Bajpayee,2026-06-12,19,38.9,negative,negative
+695,Cocktail 2,Shahid Kapoor,2026-06-19,26,40.6,negative,positive
+696,Welcome To The Jungle,Akshay Kumar,2026-06-25,26,49.5,negative,positive
+697,Ikka,Sunny Deol,2026-07-10,20,35.0,negative,negative
+698,Awarapan 2,Emraan Hashmi,2026-08-14,26,47.6,negative,positive
+699,Batwara 1947,Sunny Deol,2026-08-14,21,44.0,negative,negative
