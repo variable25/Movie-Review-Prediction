@@ -214,7 +214,7 @@ def add_split(df):
 
 
 def auc(scores, labels):
-    """Rank-based AUC. No sklearn in this .venv, and ranks handle ties properly."""
+    """Rank-based AUC. Keeps this script to numpy + pandas, and ranks tie properly."""
     scores, labels = np.asarray(scores, float), np.asarray(labels, int)
     n_pos, n_neg = labels.sum(), len(labels) - labels.sum()
     if n_pos == 0 or n_neg == 0:
