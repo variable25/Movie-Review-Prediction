@@ -1,0 +1,100 @@
+# The robot that checks your work.
+#
+# Every push and every pull request, GitHub spins up a clean computer, installs
+# this project from scratch, and runs the pipeline end to end. If anything breaks,
+# the commit gets a red X and you find out before the live app does.
+#
+# It runs the checks you already wrote - the asserts inside feature_engineering.py,
+# train_model.py and predict.py. This file does not invent new rules; it just means
+# nobody has to remember to run them.
+#
+# It deliberately does NOT run scrape_movies.py. CI should never hammer someone
+# else's website, and the scraped CSV is committed anyway.
+
+name: checks
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:      # lets you trigger a run by hand from the Actions tab
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          # Not 3.14: the deploy host tops out lower, and CI should match what
+          # actually serves the app rather than what happens to be on the laptop.
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild the features
+        # Fires every leak check in the file: no feature may see the future, the
+        # AUC tripwire at 0.75, the time split, sentiment still matching 3.5.
+        run: python feature_engineering.py
+
+      - name: Features must be reproducible
+        # The committed movies_features.csv has to hold the same numbers the script
+        # produces. If this fails, someone edited a CSV by hand or changed a rule
+        # without regenerating - either way the model was trained on something else.
+        #
+        # Values rather than bytes, so a pandas release that formats a float
+        # differently is not mistaken for a broken pipeline.
+        run: |
+          python - <<'PY'
+          import subprocess, io
+          import pandas as pd
+
+          committed = pd.read_csv(io.StringIO(subprocess.run(
+              ["git", "show", "HEAD:movies_features.csv"],
+              capture_output=True, text=True, check=True).stdout), index_col="movie_id")
+          rebuilt = pd.read_csv("movies_features.csv", index_col="movie_id")
+
+          assert list(committed.columns) == list(rebuilt.columns), "the columns changed"
+          assert committed.index.equals(rebuilt.index), "the rows changed"
+          pd.testing.assert_frame_equal(committed, rebuilt, rtol=1e-9, check_dtype=False)
+          print("movies_features.csv reproduces exactly: %d rows x %d columns"
+                % rebuilt.shape)
+          PY
+
+      - name: Retrain and freeze the model
+        # Checks the validation AUC has not drifted from what Model-Selection.py
+        # recorded, and that the saved model reloads and predicts identically.
+        run: python train_model.py
+
+      - name: Serving must work
+        # 47 actors scored, the debut path priced, shrinkage still pulling small
+        # samples toward the average, and a strong record still ranked above a weak one.
+        run: python predict.py
+
+      - name: The page must render
+        # Loads app.py headlessly and switches actors, including the newcomer branch.
+        # Catches a typo that would otherwise only show up as a stack trace in
+        # front of whoever opened the link.
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+
+          app = AppTest.from_file("app.py", default_timeout=120).run()
+          assert not app.exception, app.exception
+
+          options = app.selectbox[0].options
+          assert len(options) == 48, "expected 47 actors + the newcomer, got %d" % len(options)
+
+          for choice in ("An actor with no track record", "Bobby Deol", "Akshay Kumar"):
+              app.selectbox[0].set_value(choice).run()
+              assert not app.exception, (choice, app.exception)
+              assert app.metric[0].value.endswith("%"), choice
+              print("  %-32s %s" % (choice, app.metric[0].value))
+
+          print("the page renders on every path")
+          PY

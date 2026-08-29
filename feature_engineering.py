@@ -18,8 +18,10 @@ import pandas as pd
 
 IN_CSV = "movies_cleaned.csv"
 OUT_CSV = "movies_features.csv"
+SNAPSHOT_CSV = "actor_snapshot.csv"  # one row per actor, as of today - fed to the app
 ID_COL = "movie_id"         # written as the CSV index, so it is never a column
 TARGET_COL = "is_positive"  # the one numeric column that is not a feature
+DEBUT_ACTOR = "__debut__"   # stands for any lead with no record; never a real name
 
 # Readable columns kept beside the features. All TEXT, so select_dtypes("number")
 # skips them and a model handed one raises instead of silently training on it.
@@ -176,6 +178,63 @@ def build_as_of(df):
             all_ratings.append(movie.rating)
 
     return pd.DataFrame.from_dict(rows, orient="index").reindex(df.index)
+
+
+def as_of_today(df, as_of=None):
+    """One row per lead actor: their record as it stands for a film released today.
+
+    The modelling rows above answer "what was known before THIS film". The live app
+    needs the next question along - "what is known now, for a film nobody has made
+    yet" - and that row does not exist in the dataset.
+
+    Rather than recompute career averages here (two functions meant to agree is how
+    they end up disagreeing), append one placeholder film per actor, all dated after
+    every real release, and push the whole thing back through build_as_of. It groups
+    by date and reads history before writing to it, so those rows are scored against
+    the complete 700-film history and cannot see each other. Then read them off.
+
+    A "__debut__" actor is included so the app can price an unknown newcomer using
+    the same cold-start path a real debut takes.
+
+    Only `days_since_prev_film` and `prior_career_years` depend on `as_of`, and
+    neither is modelled - so the ten features the app actually uses are the same
+    whichever day this is regenerated.
+    """
+    if as_of is None:
+        as_of = pd.Timestamp.today().normalize()
+    as_of = pd.Timestamp(as_of)
+    assert as_of > df["release_date"].max(), \
+        "as_of must be after every real release, or the placeholders join history early"
+
+    actors = sorted(df["lead_actor"].unique()) + [DEBUT_ACTOR]
+    placeholder = pd.DataFrame({
+        "lead_actor": actors,
+        "release_date": as_of,
+        # Never read for these rows: build_as_of writes a film's rating into history
+        # only after the whole day is scored, and nothing is scored after today.
+        "rating": SCALE_MIDPOINT,
+    })
+
+    combined = pd.concat([df[["lead_actor", "release_date", "rating"]], placeholder],
+                         ignore_index=True)
+    snapshot = build_as_of(combined).tail(len(actors)).copy()
+    snapshot.insert(0, "lead_actor", actors)
+
+    # Films to date and career average, straight from the source, so the app can show
+    # the evidence next to the prediction without re-deriving it.
+    history = df.groupby("lead_actor")["rating"]
+    snapshot["films_to_date"] = snapshot["lead_actor"].map(history.size()).fillna(0)
+    snapshot["career_mean"] = snapshot["lead_actor"].map(history.mean())
+    snapshot["as_of_date"] = as_of.strftime("%Y-%m-%d")
+
+    debut = snapshot[snapshot.lead_actor == DEBUT_ACTOR]
+    assert len(debut) == 1 and debut["prior_n_films"].iloc[0] == 0, \
+        "the debut placeholder picked up a history"
+    assert (snapshot[snapshot.lead_actor != DEBUT_ACTOR]["prior_n_films"]
+            == df["lead_actor"].value_counts().reindex(actors[:-1]).to_numpy()).all(), \
+        "an actor's snapshot does not rest on all of their films"
+
+    return snapshot.set_index("lead_actor")
 
 
 def build_context(df):
@@ -382,6 +441,16 @@ def main():
     verify_output(out, feature_cols)
     out.to_csv(OUT_CSV, index=True, encoding="utf-8")
 
+    # The serving side of the same features. Written here rather than in the app so
+    # there is exactly one piece of code that knows how a prior is computed.
+    # Actor-history columns only. The genre and release-month features are properties
+    # of a specific film, not of an actor, so a "next film" row cannot carry them -
+    # and Model-Selection.py leaves them out of the model anyway.
+    snapshot = as_of_today(source)
+    missing = [c for c in as_of.columns if c not in snapshot.columns]
+    assert not missing, "the snapshot cannot serve these actor features: %s" % missing
+    snapshot.to_csv(SNAPSHOT_CSV, encoding="utf-8")
+
     # ---------------------------------------------------------------- report
     n_train = (out.split == "train").sum()
     print("Wrote %s: %d rows x %d columns"
@@ -399,6 +468,9 @@ def main():
     print("  time split         train %d (to %s) | test %d (from %s)"
           % (n_train, cutoff.date(), len(out) - n_train,
              out.loc[out.split == "test", "release_date"].min()))
+    print("  %-18s %d actors + %s, as of %s (same build_as_of, no second copy)"
+          % (SNAPSHOT_CSV, len(snapshot) - 1, DEBUT_ACTOR,
+             snapshot["as_of_date"].iloc[0]))
 
     print("\n" + "=" * 62)
     print("  Single-feature AUC vs is_positive, against EDA.ipynb")

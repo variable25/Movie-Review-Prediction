@@ -1,0 +1,69 @@
+{
+  "model": "RandomForestClassifier",
+  "hyperparameters": {
+    "max_depth": 2,
+    "min_samples_leaf": 5,
+    "n_estimators": 400
+  },
+  "trained_on": "2026-08-28",
+  "trained_rows": 700,
+  "lead_actors": 47,
+  "date_range": [
+    "2000-12-15",
+    "2026-08-14"
+  ],
+  "features": [
+    "prior_adj_mean",
+    "prior_mean",
+    "prior_mean_vs_era",
+    "prior_positive_rate",
+    "prior_last3_mean",
+    "prior_last5_mean",
+    "prior_momentum",
+    "prior_std",
+    "prior_n_films",
+    "has_history"
+  ],
+  "feature_importance": {
+    "prior_last5_mean": 0.2459,
+    "prior_positive_rate": 0.2392,
+    "prior_adj_mean": 0.1131,
+    "prior_last3_mean": 0.109,
+    "prior_mean_vs_era": 0.0769,
+    "prior_n_films": 0.0759,
+    "prior_std": 0.0549,
+    "prior_momentum": 0.0486,
+    "prior_mean": 0.0347,
+    "has_history": 0.0019
+  },
+  "decision_threshold": 0.5,
+  "target": "critic rating >= 3.5 out of 5",
+  "scores": {
+    "selected_on_validation_auc": 0.62,
+    "test_auc": 0.704,
+    "test_accuracy": 0.669,
+    "test_precision": 0.552,
+    "test_recall": 0.327,
+    "test_f1": 0.41,
+    "test_films": 139,
+    "base_rate": 0.353,
+    "always_negative_accuracy": 0.647,
+    "actor_only_oracle_accuracy": 0.703,
+    "eda_realistic_ceiling_auc": 0.69,
+    "top25pct_hit_rate": 0.56
+  },
+  "scores_note": "Measured by Model-Selection.py on 139 films from 2020-12-31 onward, held out by time and never used for training or tuning. The shipped model is retrained on all 700 films, so these numbers describe the method rather than this exact file.",
+  "limitations": [
+    "Sees one thing about a film: who is starring in it. Not the script, the director, the budget or the marketing.",
+    "The hard ceiling for any lead-actor-only model on this data is 70.3% accuracy. This model reaches 66.9%, so most of the remaining error is not fixable by a better algorithm.",
+    "Hindi-language films reviewed by Bollywood Hungama, 2000-2026. Says nothing about other industries, languages or critics.",
+    "Actors with few films are pulled toward the average on purpose, so a small-sample star will look more ordinary than their raw record.",
+    "Best used to rank a list, not to judge one film: the top 25% by predicted probability are 56% positive against a 35% base rate."
+  ],
+  "environment": {
+    "python": "3.14.7",
+    "scikit_learn": "1.9.0",
+    "pandas": "3.0.5",
+    "numpy": "2.5.2"
+  }
+}
